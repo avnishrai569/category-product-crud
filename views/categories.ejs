@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+<h1>Categories</h1>
+<form action="/categories" method="POST">
+  <input type="text" name="CategoryName" placeholder="Category Name" required />
+  <button type="submit">Add</button>
+</form>
+<table>
+  <tr>
+    <th>CategoryId</th>
+    <th>CategoryName</th>
+    <th>Actions</th>
+  </tr>
+  <% categories.forEach(category => { %>
+  <tr>
+    <td><%= category.CategoryId %></td>
+    <td><%= category.CategoryName %></td>
+    <td>
+      <form action="/categories/edit/<%= category.CategoryId %>" method="POST">
+        <input type="text" name="CategoryName" value="<%= category.CategoryName %>" required />
+        <button type="submit">Edit</button>
+      </form>
+      <form action="/categories/delete/<%= category.CategoryId %>" method="POST">
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  <% }) %>
+</table>
+<%- include('partials/footer') %>
